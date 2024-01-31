@@ -1,6 +1,6 @@
 FROM maven:3.8.5-openjdk-17
 
-MAINTAINER Sylwester Sokolowski <sylwek.sokolowski@gmail.com>
+MAINTAINER Gulam Mustafa <mustafamym@gmail.com>
 
 VOLUME /tmp
 
