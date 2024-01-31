@@ -14,16 +14,6 @@ Requirements
 - [Docker](https://docs.docker.com/install/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
-Development
------------
-1. Run Postgres database as Docker container:
-    - Create and start container: `docker run -d --name sb_flyway_postgres_docker_db --env 'DB_USER=postgres' --env 'DB_PASS=postgres' --env 'DB_NAME=sb-flyway-postgres-docker-db' --env 'PG_TRUST_LOCALNET=true' -p 5433:5432 sameersbn/postgresql:9.6-1`
-    - Stop running container: `docker stop sb_flyway_postgres_docker_db`
-    - Start container: `docker start sb_flyway_postgres_docker_db`
-    - Remove container: `docker rm sb_flyway_postgres_docker_db`
-2. Go to location of `pom.xml` and run Spring Boot application: `mvn spring-boot:run`
-3. Test API: `curl -X 'GET' \ 'http://localhost:8080/api/customers' \ -H 'accept: application/json'`
-
 Docker Compose usage
 --------------------
 1. Go to `docker` location
@@ -40,17 +30,14 @@ Docker Compose usage
 - `docker-compose start` - start Docker containers
 - `docker-compose stop` - stop Docker containers
 - `docker-compose logs -f` - tailing logs of Docker cotainers
-- `docker-compose ps` - check status of Docker cotainers
+- `docker-compose ps` - check status of Docker cotainers 
+
+Test API: `curl -X 'GET' \ 'http://localhost:8080/api/customers' \ -H 'accept: application/json'`
+
 
 ##### Persistence
 For PostgreSQL to preserve its state across container destroy and create, Docker mount a volume located in `docker/storage` (defined in a Dockerfile)
 
-
-# Swagger API Docs
-
-When you run our application, specification will be generated. You can check it here:
-
-`http://localhost:8080/swagger-ui/index.html`
 
 #### exposed API call via curl
 
@@ -75,6 +62,13 @@ When you run our application, specification will be generated. You can check it 
 ` curl -X 'GET' \ 'http://localhost:8080/api/sales/max-sale-day?startDate=2024-01-30&endDate=2024-01-31' \ -H 'accept: application/json' `
 
 
+# Swagger API Docs
+
+When you run our application, specification will be generated. You can check it here:
+
+`http://localhost:8080/swagger-ui/index.html`
+
+![Screenshot](swagger-img.png)
 
 
 
