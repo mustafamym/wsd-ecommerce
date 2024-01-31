@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  psql-db:
+    image: postgres:latest
+    container_name: psql-db
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=restaurant_service
+    ports:
+      - '5432:5432'
+  flyway:
+    image: flyway/flyway:latest
+    command: -url=jdbc:postgresql://psql-db:5432/restaurant_service -user=postgres -password=postgres migrate
+    volumes:
+      - ./sql:/flyway/sql
+    depends_on:
+      - psql-db
+  recipe:
+    container_name: restaurant_service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8080:8080'
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - psql-db

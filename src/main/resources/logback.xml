@@ -57,7 +57,7 @@
     <logger name="org.apache.kafka" level="error">
     </logger>
 
-    <springProfile name="local">
+    <springProfile name="docker">
         <root level="INFO">
             <appender-ref ref="JSONLogging"/>
         </root>
