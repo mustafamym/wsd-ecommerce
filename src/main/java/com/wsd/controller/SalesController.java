@@ -3,6 +3,8 @@ package com.wsd.controller;
 import com.wsd.service.SalesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,14 +20,16 @@ public class SalesController {
     private SalesService orderService;
 
     @GetMapping("total-amount/current-day")
-    public BigDecimal getTotalSaleAmountForCurrentDay() {
-        return orderService.getTotalSaleAmountForCurrentDay();
+    public ResponseEntity<BigDecimal> getCurrentDayOrders() {
+
+        return new ResponseEntity<>(orderService.getTotalSaleAmountForCurrentDay(), HttpStatus.OK);
     }
 
     @GetMapping("/max-sale-day")
-    public LocalDate getMaxSaleDay(
+    public ResponseEntity<LocalDate> getMaxSaleDay(
             @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
-        return orderService.getMaxSaleDay(startDate, endDate);
+
+        return new ResponseEntity<>(orderService.getMaxSaleDay(startDate, endDate), HttpStatus.OK);
     }
 }
