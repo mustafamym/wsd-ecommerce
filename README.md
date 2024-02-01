@@ -70,5 +70,10 @@ When you run our application, specification will be generated. You can check it 
 ![Screenshot](swagger-img.png)
 
 
+# Improvement area 
+
+- add test cast (unit and integration)
+- global error handling
+
 
 
